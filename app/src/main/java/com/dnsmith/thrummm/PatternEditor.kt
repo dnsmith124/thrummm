@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-or-later
 package com.dnsmith.thrummm
 
 import android.text.Editable
@@ -34,7 +35,7 @@ class PatternEditor(
         orientation = VERTICAL
 
         val options = buildList {
-            if (defaultSpec != null) add("Use default · ${defaultSpec.label()}" to null)
+            if (defaultSpec != null) add("Use default · ${defaultSpec.shortLabel()}" to null)
             Preset.values().forEach { add(it.label to it) }
         }
         addView(ui.Choice(options, preset, vertical = true) { preset = it; changed() }, matchWidth())
