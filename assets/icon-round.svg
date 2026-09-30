@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="18 18 72 72" width="288" height="288">
+  <!-- The launcher icon as a circular launcher shows it: the central 72 of the 108 canvas. -->
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#EDEDED"/><stop offset="1" stop-color="#D2D2D2"/>
+    </linearGradient>
+    <clipPath id="c"><circle cx="54" cy="54" r="36"/></clipPath>
+  </defs>
+  <g clip-path="url(#c)">
+    <rect x="18" y="18" width="72" height="72" fill="url(#g)"/>
+    <circle cx="54" cy="54" r="27" fill="#141414"/>
+    <path d="M32,54 L38,54 q2.667,-6 5.333,0 q2.667,12 5.333,0 q2.667,-18 5.333,0 q2.667,18 5.333,0 q2.667,-12 5.333,0 q2.667,6 5.333,0 L76,54" fill="none" stroke="#EEEEEE" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+</svg>

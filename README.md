@@ -1,15 +1,14 @@
 <p align="center">
-  <img src="assets/screenshots/dark-pattern.png" alt="Thrummm's Pattern tab in the dark theme: preset list with Very long selected" width="240">
-  &nbsp;&nbsp;
-  <img src="assets/screenshots/ambient-pattern.png" alt="Thrummm's Pattern tab in the Ambient theme: the same list over a soft daytime-blue sky" width="240">
+  <img src="assets/icon-round.svg" alt="Thrummm icon: a thin swelling waveform on a dark disc" width="120">
 </p>
 
 # Thrummm
 
-**Longer, stronger-feeling notification vibrations for the [Sidephone SP-01](https://sidephone.com):
-buzzes you actually notice.**
+**Longer, stronger-feeling notification vibrations for the [Sidephone SP-01](https://sidephone.com)**
 
 <p align="center">
+  <a href="https://github.com/dnsmith124/thrummm/releases/latest"><img src="https://img.shields.io/github/v/release/dnsmith124/thrummm?color=4a9e8f&label=Release" alt="Latest release"></a>
+  &nbsp;
   <img src="https://img.shields.io/badge/License-GPL--3.0-4a9e8f" alt="License: GPL-3.0">
   &nbsp;
   <img src="https://img.shields.io/badge/Android-12%2B-4a9e8f" alt="Android 12+">
@@ -17,13 +16,18 @@ buzzes you actually notice.**
   <img src="https://img.shields.io/badge/APK-~190%20KB-4a9e8f" alt="APK about 190 KB">
 </p>
 
+<p align="center">
+  <img src="assets/screenshots/dark-pattern.png" alt="Thrummm's Pattern tab in the dark theme: preset list with Very long selected" width="240">
+  &nbsp;&nbsp;
+  <img src="assets/screenshots/ambient-pattern.png" alt="Thrummm's Pattern tab in the Ambient theme: the same list over a soft daytime-blue sky" width="240">
+</p>
+
 Thrummm replaces the faint stock notification buzz on the SP-01, a de-Googled AOSP phone,
 with a vibration pattern you choose, for the apps you choose. It can also loop a pattern
 while a call rings. It is small, needs no internet access, and borrows the calm look of
 [SideSuite](https://github.com/side-suite).
 
-> **In one sentence:** the SP-01's motor is too slow to feel the stock 100 ms pulses, so
-> Thrummm plays longer ones.
+> **Tldr:** the SP-01's motor is too slow to feel the stock 100 ms pulses, so Thrummm plays longer ones.
 
 ---
 
@@ -39,6 +43,7 @@ while a call rings. It is small, needs no internet access, and borrows the calm 
 - [Known limitations](#known-limitations)
 - [Status](#status)
 - [For developers](#for-developers)
+- [Feedback](#feedback)
 - [License](#license)
 - [Credits](#credits)
 
@@ -46,8 +51,7 @@ while a call rings. It is small, needs no internet access, and borrows the calm 
 
 ## Why Thrummm
 
-On the SP-01, notifications are easy to miss. The phone doesn't lack a setting. The cause is
-the motor itself.
+If you've got your Sidephone on vibrate notifications are really easy to miss. You can turn vibration on or off, but there's no way to increase the intensity of the vibration.
 
 - **The motor is on/off only.** The vibrator reports no amplitude control
   (`dumpsys vibrator_manager` shows `mCapabilities=[]`), so every vibration already runs at full
@@ -58,8 +62,7 @@ the motor itself.
 - **Longer pulses feel much stronger.** The dialer's missed-call pattern (350 / 250 / 350 ms)
   is noticeably easier to feel, and the ringtone's longer, ramped pulses are easier still.
 
-So the fix is **longer pulses, not stronger ones**. Thrummm listens for notifications from the
-apps you pick and plays your pattern.
+So the fix is **longer pulses, rather than stronger ones**. Thrummm listens for notifications from the apps you pick and plays your pattern.
 
 ---
 
@@ -125,6 +128,8 @@ background, so every combination stays readable.
   SideHome's **Home wallpaper** sync keeps painted. If the colours don't match, turn that sync
   on in SideHome's settings.
 - **Ambient:** a sky that moves from night navy through dawn rose, day blue, and dusk orange.
+  It uses a fixed latitude of 60° (SideHome's default), so its dawn and dusk colours won't line
+  up exactly with your local sunrise and sunset.
 - **Light** and **Dark:** SideHome's "Full light" and "Full dark" colours.
 
 <p align="center">
@@ -140,15 +145,28 @@ background, so every combination stays readable.
 
 ## Install
 
-1. Get the APK: download it from [Releases](https://github.com/dnsmith124/thrummm/releases)
-   (once published), or build it yourself (see [For developers](#for-developers)).
+1. Download `Thrummm-v1.0.apk` from [Releases](https://github.com/dnsmith124/thrummm/releases),
+   or build it yourself (see [For developers](#for-developers)).
 2. Install over USB:
    ```
-   adb install -r app-release.apk
+   adb install -r Thrummm-v1.0.apk
    ```
    or copy the APK to the phone and open it.
 
 For update notifications, add this repo to **[Obtainium](https://github.com/ImranR98/Obtainium)**.
+
+**Verify the download.** Releases are signed with a key whose SHA-256 certificate fingerprint is:
+
+```
+EE:FB:FD:A7:7B:F1:0B:F4:CC:46:90:5F:19:0C:61:2B:FA:A2:58:50:7F:56:C8:00:B4:8A:5C:01:25:56:9F:42
+```
+
+Check it with [AppVerifier](https://github.com/soupslurpr/AppVerifier), Obtainium, or
+`apksigner verify --print-certs Thrummm-v1.0.apk`. Updates install only over copies signed with
+the same key.
+
+**Updating from a build you compiled yourself:** uninstall it first. Its signature won't match
+the release, so Android won't install over it. This clears Thrummm's settings.
 
 Requires Android 12 (API 31). It's designed for the SP-01's 480 × 640 screen and should work
 on other Android 12+ phones.
@@ -221,9 +239,9 @@ To play your patterns.
 
 ## Status
 
-**v1.0.** Running on an SP-01. All features were checked on the device, including
-notification and call timing against the system's vibration history. There are no automated
-tests yet.
+**v1.0.** Tested on an SP-01 with the release build: notifications in vibrate and ring mode,
+per-app patterns, the call loop with and without a separate call pattern, silent and Do Not
+Disturb, and after a reboot. There are no automated tests yet.
 
 ---
 
@@ -306,6 +324,14 @@ adb logcat -s Thrummm                   # debug builds log each buzz
 
 ---
 
+## Feedback
+
+Bug reports, ideas, and pattern suggestions are welcome in
+[Issues](https://github.com/dnsmith124/thrummm/issues). If you report a timing problem, the
+output of `adb shell dumpsys vibrator_manager` right after it happens helps a lot.
+
+---
+
 ## License
 
 Thrummm is free software under the **GNU General Public License v3.0 or later**; see
@@ -320,6 +346,7 @@ The bundled [Inter](https://rsms.me/inter/) typeface is under the SIL Open Font 
 
 ## Credits
 
+- Made by David Smith ([@dnsmith124](https://github.com/dnsmith124)).
 - Built for the **[Sidephone SP-01](https://sidephone.com)**.
 - Design inspired by **[SideSuite](https://github.com/side-suite)**, especially
   [SideHome](https://github.com/side-suite/SideHome): its type scale and pill controls. The
